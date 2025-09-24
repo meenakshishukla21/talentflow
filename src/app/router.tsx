@@ -1,5 +1,7 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import AppLayout from './layouts/AppLayout'
+import ErrorPage from './ErrorPage'
+import NotFoundPage from './pages/NotFoundPage'
 import JobsPage from '../features/jobs/pages/JobsPage'
 import JobDetailPage from '../features/jobs/pages/JobDetailPage'
 import CandidateListPage from '../features/candidates/pages/CandidateListPage'
@@ -11,6 +13,7 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <AppLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -39,6 +42,10 @@ export const router = createBrowserRouter([
       {
         path: 'assessments/:jobId',
         element: <AssessmentBuilderPage />
+      },
+      {
+        path: '*',
+        element: <NotFoundPage />
       }
     ]
   }
