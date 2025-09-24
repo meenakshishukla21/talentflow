@@ -9,44 +9,51 @@ import CandidateProfilePage from '../features/candidates/pages/CandidateProfileP
 import AssessmentsOverviewPage from '../features/assessments/pages/AssessmentsOverviewPage'
 import AssessmentBuilderPage from '../features/assessments/pages/AssessmentBuilderPage'
 
-export const router = createBrowserRouter([
+const baseName = import.meta.env.BASE_URL.replace(/\/$/, '')
+
+export const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <AppLayout />,
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          index: true,
+          element: <Navigate to="/jobs" replace />
+        },
+        {
+          path: 'jobs',
+          element: <JobsPage />
+        },
+        {
+          path: 'jobs/:jobId',
+          element: <JobDetailPage />
+        },
+        {
+          path: 'candidates',
+          element: <CandidateListPage />
+        },
+        {
+          path: 'candidates/:candidateId',
+          element: <CandidateProfilePage />
+        },
+        {
+          path: 'assessments',
+          element: <AssessmentsOverviewPage />
+        },
+        {
+          path: 'assessments/:jobId',
+          element: <AssessmentBuilderPage />
+        },
+        {
+          path: '*',
+          element: <NotFoundPage />
+        }
+      ]
+    }
+  ],
   {
-    path: '/',
-    element: <AppLayout />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        index: true,
-        element: <Navigate to="/jobs" replace />
-      },
-      {
-        path: 'jobs',
-        element: <JobsPage />
-      },
-      {
-        path: 'jobs/:jobId',
-        element: <JobDetailPage />
-      },
-      {
-        path: 'candidates',
-        element: <CandidateListPage />
-      },
-      {
-        path: 'candidates/:candidateId',
-        element: <CandidateProfilePage />
-      },
-      {
-        path: 'assessments',
-        element: <AssessmentsOverviewPage />
-      },
-      {
-        path: 'assessments/:jobId',
-        element: <AssessmentBuilderPage />
-      },
-      {
-        path: '*',
-        element: <NotFoundPage />
-      }
-    ]
+    basename: baseName
   }
-])
+)

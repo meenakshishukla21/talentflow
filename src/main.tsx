@@ -10,7 +10,13 @@ async function prepare(): Promise<void> {
   await ensureSeedData()
   if (typeof window !== 'undefined') {
     const { worker } = await import('./mocks/browser')
-    await worker.start({ onUnhandledRequest: 'bypass' })
+    const workerUrl = `${import.meta.env.BASE_URL}mockServiceWorker.js`
+    await worker.start({
+      serviceWorker: {
+        url: workerUrl
+      },
+      onUnhandledRequest: 'bypass'
+    })
   }
 }
 

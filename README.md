@@ -59,7 +59,8 @@ src/
 
 ## Deployment Notes
 
-The production bundle can be hosted on any static host. Ensure the generated `public/mockServiceWorker.js` file is deployed alongside the app so MSW can intercept requests in production mode.
+- The Vite config ships with `base: '/talentflow/'` so the SPA works on GitHub Pages at `https://<user>.github.io/talentflow/`. Adjust this if you deploy under a different path.
+- When hosting the static bundle, be sure `mockServiceWorker.js` is deployed alongside the assets; the runtime automatically resolves its location using `import.meta.env.BASE_URL`.
 
 ## Tooling
 
@@ -68,4 +69,3 @@ The production bundle can be hosted on any static host. Ensure the generated `pu
 - MSW for API mocking
 - Dexie for IndexedDB persistence
 - @dnd-kit for drag-and-drop interactions
-
